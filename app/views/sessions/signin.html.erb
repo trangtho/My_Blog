@@ -1,0 +1,20 @@
+<h1>Sign in</h1>
+
+<%= form_for :user do |form| %>
+  <div class="mb-3">
+    <%= form.label :username, style: "display: block", class: "form-label" %>
+    <%= form.text_field :username, class: "form-control", placeholder: "Your username" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :password, style: "display: block", class: "form-label" %>
+    <%= form.password_field :password, class: "form-control", placeholder: "Your password" %>
+  </div>
+
+  <div>
+    <%= form.submit "Sign in", class: "btn btn-primary" %>
+    <%= link_to "Sign up", "users/new", class: "btn btn-primary" %>
+  </div>
+<% end %>
+
+<br>

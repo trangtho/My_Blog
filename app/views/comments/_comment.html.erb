@@ -1,0 +1,10 @@
+
+<%= form_for :comment, url: post_comments_path(post_id), method: :POST, local: true do |form| %>
+  <p>
+    <%= form.label :Comment %><br>
+    <%= form.text_field :content %>
+  </p>
+  <p>
+    <%= form.submit "Add comment" %>
+  </p>
+<% end %>

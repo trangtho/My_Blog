@@ -1,0 +1,36 @@
+<div class="jumbotron" style="text-align:center;">
+  <h1 class="display-4">Hello, wellcome to <%= @user.username %> 'blog!</h1>
+  <% if @user.id!= session[:current_user_id] %>
+  <% if @status == "Follow"%>
+    <%= button_to @status, follow_path(user_id: @user.id), method: :post, class: "follow-btn" %>
+  <% else%>
+    <%= button_to @status, unfollow_path(user_id: @user.id), method: :post, class: "follow-btn" %>
+  <%end%>
+  <%end%>
+</div>
+
+<div class="row">
+  <% @posts.each do |post| %>
+    <div class="col-sm-4">
+      <h4><%= post.title %></h3>
+      <p><%= post.content %></p>
+      <div>
+</div>
+      <div class="input-group mb-3">
+        
+      </div>
+        <%= render "comments/comment", post_id: post.id %>
+        <h4>List of Comments</h4>
+        <% post.comments.each do |comment| %>
+          <div class="row">
+            <div class="col-4">
+              <h6><%= comment.user.username%></h6>
+            </div>
+            <div class="col-8">
+              <h6><%= comment.content%></h6>
+            </div>
+          </div>
+        <%end%>
+      </div>
+    <% end %>
+</div>

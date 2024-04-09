@@ -1,0 +1,28 @@
+<div class="jumbotron" style="text-align:center;">
+  <h1 class="display-4">Hello, wellcome to blog application!</h1>
+</div>
+
+<div class="row">
+  <% @posts.each do |post| %>
+    <div class="col-sm-4">
+      <%= link_to post.user.username, user_path(post, id: post.user_id) %>
+      <h4><%= post.title %></h3>
+      <p><%= post.content %></p>
+      <div class="input-group mb-3">
+        <%= render "comments/comment", post_id: post.id %>
+        </div>
+        <h4>List of Comments</h4>
+        <% post.comments.each do |comment| %>
+          <div class="row">
+            <div class="col-4">
+              <h6><%= comment.user.username%></h6>
+            </div>
+            <div class="col-8">
+              <h6><%= comment.content%></h6>
+            </div>
+          </div>
+        <%end%>
+      </div>
+    <% end %>
+</div>
+
