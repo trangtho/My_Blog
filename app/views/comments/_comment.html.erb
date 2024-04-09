@@ -1,10 +1,10 @@
 
 <%= form_for :comment, url: post_comments_path(post_id), method: :POST, local: true do |form| %>
-  <p>
-    <%= form.label :Comment %><br>
-    <%= form.text_field :content %>
-  </p>
-  <p>
-    <%= form.submit "Add comment" %>
-  </p>
+  
+  
+
+  <div class="input-group mb-3">
+    <%= form.text_field :content, class: "form-control" %>
+    <%= form.submit "Add comment", class: "btn btn-outline-secondary" %>
+  </div>
 <% end %>

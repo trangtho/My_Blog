@@ -21,6 +21,11 @@
     <%= form.text_area :content, class: "form-control" %>
   </div>
 
+  <div class="mb-3">
+    <%= form.label :main_image %>
+    <%= form.file_field :main_image %>
+  </div>
+
   <div>
     <%= form.submit "Save", class: "btn btn-primary" %>
   </div>

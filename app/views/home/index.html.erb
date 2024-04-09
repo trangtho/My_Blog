@@ -2,27 +2,26 @@
   <h1 class="display-4">Hello, wellcome to blog application!</h1>
 </div>
 
-<div class="row">
+<%# <div class="row"> %>
   <% @posts.each do |post| %>
-    <div class="col-sm-4">
+    <div class="mb-3">
       <%= link_to post.user.username, user_path(post, id: post.user_id) %>
       <h4><%= post.title %></h3>
       <p><%= post.content %></p>
-      <div class="input-group mb-3">
+      <div>
         <%= render "comments/comment", post_id: post.id %>
         </div>
         <h4>List of Comments</h4>
+        <table class="table table-striped">
         <% post.comments.each do |comment| %>
-          <div class="row">
-            <div class="col-4">
-              <h6><%= comment.user.username%></h6>
-            </div>
-            <div class="col-8">
-              <h6><%= comment.content%></h6>
-            </div>
-          </div>
+          <tr>
+            <td><%= comment.user.username%></td>
+            <td><%= comment.content%></td>
+          </tr>
         <%end%>
+        </table>
       </div>
     <% end %>
-</div>
+    <%= paginate @posts%>
+<%# </div> %>
 
