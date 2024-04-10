@@ -22,9 +22,16 @@ class PostsController < ApplicationController
   # POST /posts or /posts.json
   def create
     @post = Post.new(user_id: session[:current_user_id], title: post_params['title'], content: post_params['content'])
+    # @post = Post.new(post_params.merge(user_id: session[:current_user_id]))
+
 
     respond_to do |format|
       if @post.save
+        if post_params['images'].present?
+          post_params['images'].each do |image|
+            @post.images.attach(image)
+          end
+        end
         format.html { redirect_to my_page_url(@post), notice: "Post was successfully created." }
         format.json { render :show, status: :created, location: @post }
       else

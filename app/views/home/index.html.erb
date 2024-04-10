@@ -8,6 +8,21 @@
       <%= link_to post.user.username, user_path(post, id: post.user_id) %>
       <h4><%= post.title %></h3>
       <p><%= post.content %></p>
+
+      <ul>
+        <% post.images.each do |file| %>
+          <li>
+            <% if file.representable? %>
+              <%= image_tag file.representation(resize_to_limit: [100, 100]) %>
+            <% else %>
+              <%= link_to rails_blob_path(file, disposition: "attachment") do %>
+                <%= image_tag "placeholder.png", alt: "Download file" %>
+              <% end %>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+
       <div>
         <%= render "comments/comment", post_id: post.id %>
         </div>
@@ -22,6 +37,6 @@
         </table>
       </div>
     <% end %>
-    <%= paginate @posts%>
+  <%= paginate @posts%>
 <%# </div> %>
 

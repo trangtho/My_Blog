@@ -6,6 +6,21 @@
   <div class="mb-3">
     <h4><%= post.title %></h3>
     <p><%= post.content %></p>
+
+    <ul>
+        <% post.images.each do |file| %>
+          <li>
+            <% if file.representable? %>
+              <%= image_tag file.representation(resize_to_limit: [100, 100]) %>
+            <% else %>
+              <%= link_to rails_blob_path(file, disposition: "attachment") do %>
+                <%= image_tag "placeholder.png", alt: "Download file" %>
+              <% end %>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+      
     <div>
       <%= link_to "Edit this post", edit_post_path(post) %> |
       <%= link_to "Delete this post", post_path(post), method: :delete, data: { confirm: "Are you sure you want to delete this post?" } %>
@@ -22,4 +37,5 @@
     </table>
   </div>
 <% end %>
+<%= paginate @posts%>
 
