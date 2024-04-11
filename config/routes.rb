@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
-  
-  # root to: "home#index"
-  root to: "users#index"
+  devise_for :users
+#, :controllers => {:registrations => "registrations"}  
+  root to: "home#index"
+  # root to: "users#index"
   resources :posts do
     resources :comments
   end
@@ -16,7 +17,7 @@ Rails.application.routes.draw do
   get "sign_in", to: "users#index"
   post "sign_in", to: "users#sign_in"
   get "sign_out", to: "users#sign_out"
-  get "my_page", to: "home#my_page"
+  get "my_post", to: "posts#my_post"
   post "follow", to: "users#follow"
   post "unfollow", to: "users#unfollow"
   get "home_page", to: "home#index"

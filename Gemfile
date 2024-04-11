@@ -32,6 +32,8 @@ gem "jbuilder"
 #gem 'devise', '~> 4.9', '>= 4.9.3'
 gem 'kaminari'
 gem 'image_processing', '~> 1.2'
+gem 'devise'
+gem 'dotenv', groups: [:development, :test]
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"

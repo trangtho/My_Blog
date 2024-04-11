@@ -1,42 +1,39 @@
 <div class="jumbotron" style="text-align:center;">
   <h1 class="display-4">Hello, wellcome to blog application!</h1>
 </div>
+<% @posts.each do |post| %>
+  <div class="mb-3">
+    <%= link_to post.user.username, user_path(post, id: post.user_id) %>
+    <h4><%= post.title %></h3>
+    <p><%= post.content %></p>
 
-<%# <div class="row"> %>
-  <% @posts.each do |post| %>
-    <div class="mb-3">
-      <%= link_to post.user.username, user_path(post, id: post.user_id) %>
-      <h4><%= post.title %></h3>
-      <p><%= post.content %></p>
-
-      <ul>
-        <% post.images.each do |file| %>
-          <li>
-            <% if file.representable? %>
-              <%= image_tag file.representation(resize_to_limit: [100, 100]) %>
-            <% else %>
-              <%= link_to rails_blob_path(file, disposition: "attachment") do %>
-                <%= image_tag "placeholder.png", alt: "Download file" %>
-              <% end %>
-            <% end %>
-          </li>
+    <ul>
+      <% post.images.each do |file| %>
+        <li>
+          <% if file.representable? %>
+            <%= image_tag file.representation(resize_to_limit: [100, 100]) %>
+          <% else %>
+            <%= link_to rails_blob_path(file, disposition: "attachment") do %>
+            <%= image_tag "placeholder.png", alt: "Download file" %>
+          <% end %>
         <% end %>
-      </ul>
+        </li>
+      <% end %>
+    </ul>
 
-      <div>
-        <%= render "comments/comment", post_id: post.id %>
-        </div>
-        <h4>List of Comments</h4>
-        <table class="table table-striped">
-        <% post.comments.each do |comment| %>
-          <tr>
-            <td><%= comment.user.username%></td>
-            <td><%= comment.content%></td>
-          </tr>
-        <%end%>
-        </table>
-      </div>
-    <% end %>
-  <%= paginate @posts%>
-<%# </div> %>
+    <div>
+      <%= render "comments/comment", post_id: post.id %>
+    </div>
+    <h4>List of Comments</h4>
+    <table class="table table-striped">
+      <% post.comments.each do |comment| %>
+        <tr>
+          <td><%= comment.user.username%></td>
+          <td><%= comment.content%></td>
+        </tr>
+      <%end%>
+    </table>
+  </div>
+<% end %>
+<%= paginate @posts%>
 

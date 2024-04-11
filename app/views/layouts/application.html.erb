@@ -15,7 +15,7 @@
   </head>
 
   <body>
-    <% if session[:current_user_id] != nil %>
+    <% if user_signed_in? %> 
     <%= render 'layouts/navbar' %> 
     <% end %>
     <div class="container">

@@ -30,22 +30,22 @@ default: &default
 
 development:
   <<: *default
-  database: Post_Development
-  username: sammy
-  password: 12345
-  host: localhost
-  port: 5432
+  database: <%= ENV['DB_DEV'] %>
+  username: <%= ENV['DB_USERNAME'] %>
+  password: <%= ENV['DB_PASSWORD'] %>
+  host: <%= ENV['DB_HOST'] %>
+  port: <%= ENV['DB_PORT'] %>
 
 test:
   <<: *default
-  database: Post_Test
-  username: sammy
-  password: 12345
-  host: localhost
-  port: 5432
+  database: <%= ENV['DB_TEST'] %>
+  username: <%= ENV['DB_USERNAME'] %>
+  password: <%= ENV['DB_PASSWORD'] %>
+  host: <%= ENV['DB_HOST'] %>
+  port: <%= ENV['DB_PORT'] %>
 
 production:
   <<: *default
-  database: Post_Production
-  username: sammy
+  database: <%= ENV['DB_PRODUCTION'] %>
+  username: <%= ENV['USERNAME'] %>
   password: <%= ENV['PROJECT_DATABASE_PASSWORD'] %>

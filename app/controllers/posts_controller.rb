@@ -1,11 +1,6 @@
 class PostsController < ApplicationController
   before_action :set_post, only: %i[ show edit update destroy ]
 
-  # GET /posts or /posts.json
-  def index
-    @posts = Post.all
-  end
-
   # GET /posts/1 or /posts/1.json
   def show
   end
@@ -21,10 +16,7 @@ class PostsController < ApplicationController
 
   # POST /posts or /posts.json
   def create
-    @post = Post.new(user_id: session[:current_user_id], title: post_params['title'], content: post_params['content'])
-    # @post = Post.new(post_params.merge(user_id: session[:current_user_id]))
-
-
+    @post = Post.new(user_id: current_user.id, title: post_params['title'], content: post_params['content'])
     respond_to do |format|
       if @post.save
         if post_params['images'].present?
@@ -32,7 +24,7 @@ class PostsController < ApplicationController
             @post.images.attach(image)
           end
         end
-        format.html { redirect_to my_page_url(@post), notice: "Post was successfully created." }
+        format.html { redirect_to my_post_url(@post), notice: "Post was successfully created." }
         format.json { render :show, status: :created, location: @post }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -45,7 +37,7 @@ class PostsController < ApplicationController
   def update
     respond_to do |format|
       if @post.update(post_params)
-        format.html { redirect_to my_page_url(@post), notice: "Post was successfully updated." }
+        format.html { redirect_to my_post_url(@post), notice: "Post was successfully updated." }
         format.json { render :show, status: :ok, location: @post }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -61,15 +53,24 @@ class PostsController < ApplicationController
     @post.destroy
 
     respond_to do |format|
-      format.html { redirect_to my_page_url, notice: "Post was successfully destroyed." }
+      format.html { redirect_to my_post_url, notice: "Post was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  def my_post
+    @posts = Post.where(user_id: current_user.id).order(created_at: :desc).page(params[:page]).per(3)
+    @current_user = User.find_by id: current_user.id
+    rescue
+      redirect_to root_path
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_post
       @post = Post.find(params[:id])
+      rescue
+        redirect_to root_path
     end
 
     # Only allow a list of trusted parameters through.

@@ -1,9 +1,17 @@
 class User < ApplicationRecord
-    has_many :posts#, class_name: "Post", foreign_key: 'user_id'
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :validatable, authentication_keys: [:username]
+    has_many :posts
     has_many :comments
     has_many :subcribers, class_name: "Subscription", foreign_key: 'subcriber_id'
     has_many :subcriber_tos, class_name: "Subscription", foreign_key: 'subcriber_to_id'
 
-    # validates :username, password: true
-    # validates :password, presence: true, length: { minimum: 5 }
+    def email_required?
+      false 
+    end   
+
+    def will_save_change_to_email?
+    end
 end
