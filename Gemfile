@@ -34,6 +34,7 @@ gem 'kaminari'
 gem 'image_processing', '~> 1.2'
 gem 'devise'
 gem 'dotenv', groups: [:development, :test]
+gem 'rubocop'
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"

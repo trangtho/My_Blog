@@ -4,9 +4,8 @@
   <%= render "devise/shared/error_messages", resource: resource %>
 
   <div class="field">
-    <%= f.label :Username %><br />
-    <%= f.text_field :username %>%
-    <%# <%= f.text_field :username, autofocus: true, autocomplete: "username", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.username) %> %>
+    <%= f.label :Email %><br />
+    <%= f.email_field :email %>%
   </div>
 
   <div class="actions">
