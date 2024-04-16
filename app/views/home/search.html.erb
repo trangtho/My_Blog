@@ -1,12 +1,7 @@
 <div class="jumbotron" style="text-align:center;">
-  <h1 class="display-4">Hello, wellcome to blog application!</h1>
-
-<%= form_tag(search_path, method: :get) do %>
-  <%= text_field_tag :term %>
-  <%= submit_tag 'Search' %>
-<% end %>
-
+  <h1 class="display-4">Search results for "<%= params['term']%>"</h1>
 </div>
+
 <% @posts.each do |post| %>
   <div class="mb-3">
     <%= link_to post.user.username, user_path(post, id: post.user_id), class:"font-weight-bold" %><br>
@@ -43,5 +38,3 @@
     </table>
   </div>
 <% end %>
-<%= paginate @posts%>
-

@@ -15,4 +15,5 @@ Rails.application.routes.draw do
   get "home_page", to: "home#index"
   get "categories", to: "categories#index"
   post "categories", to: "categories#new"
+  get "search", to: "home#search"
 end
