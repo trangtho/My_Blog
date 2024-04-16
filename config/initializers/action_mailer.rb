@@ -1,6 +1,6 @@
 ActionMailer::Base.smtp_settings = {
-    user_name: ENV['SENDGRID_USERNAME'],
-    password: ENV['SENDGRID_PASSWORD'],
+    user_name: ENV['SG_USERNAME'],
+    password: ENV['SG_PASSWORD'],
     domain: ENV['DB_HOST'],
     address: ENV['SG_ADDRESS'],
     port: ENV['SG_PORT'],
