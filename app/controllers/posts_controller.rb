@@ -31,6 +31,9 @@ class PostsController < ApplicationController
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end
+    post_params['category_ids'].each do |category_ids|
+      @postcategory = @post.postcategories.create(category_id: category_ids)  
+    end
   end
 
   # PATCH/PUT /posts/1 or /posts/1.json
@@ -75,6 +78,6 @@ class PostsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def post_params
-      params.require(:post).permit(:title, :content, images: [])
+      params.require(:post).permit(:title, :content, images: [], category_ids: [])
     end
 end

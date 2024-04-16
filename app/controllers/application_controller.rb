@@ -4,6 +4,6 @@ class ApplicationController < ActionController::Base
     
     def configure_permitted_parameters
         devise_parameter_sanitizer.permit(:user, keys: [:username, :email, :password])
-   end
+    end
 
 end

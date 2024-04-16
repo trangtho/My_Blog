@@ -1,0 +1,19 @@
+<h4>List of category</h4>
+    <table class="table table-striped">
+      <% @category.each do |category| %>
+        <tr>
+          <td><%= category.name%></td>
+        </tr>
+      <%end%>
+    </table>
+
+    <%= form_for :category, url: categories_path, method: :POST, local: true do |f| %>
+  <div class="field">
+    <%= f.label :"Name of category" %><br />
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Add", class: "btn btn-primary" %>
+  </div>
+<% end %>

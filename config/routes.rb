@@ -13,4 +13,6 @@ Rails.application.routes.draw do
   post "follow", to: "users#follow"
   post "unfollow", to: "users#unfollow"
   get "home_page", to: "home#index"
+  get "categories", to: "categories#index"
+  post "categories", to: "categories#new"
 end
