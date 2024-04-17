@@ -33,6 +33,13 @@
         <tr>
           <td><%= comment.user.username%></td>
           <td><%= comment.content%></td>
+          <% if can? :destroy, comment %>
+          <td><%= link_to "Delete", comment_path(comment), data: {
+                    turbo_method: :delete
+                  } %></td>
+                  <%else%>
+                  <td><%= link_to "Delete"%></td>
+                  <% end %>
         </tr>
       <%end%>
     </table>

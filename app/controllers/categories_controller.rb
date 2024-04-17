@@ -3,7 +3,7 @@ class CategoriesController < ApplicationController
     @category = Category.all
   end
 
-  def new
+  def create
     @category = Category.new(category_params)
     respond_to do |format|
       if @category.save
