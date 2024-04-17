@@ -4,14 +4,10 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    if user.role == "Admin"
-      can :manage, :all
-    end
-    if user.role == "User"
-      can :manage, Post
-    end
+    can :manage, :all if user.role == 'Admin'
+    return unless user.role == 'User'
 
-
+    can :manage, Post
     # Define abilities for the user here. For example:
     #
     #   return unless user.present?

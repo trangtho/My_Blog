@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
-  root to: "home#index"
+  root to: 'home#index'
   resources :posts do
     resources :comments
   end
@@ -10,12 +10,9 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
-  get "my_post", to: "posts#my_post"
-  post "follow", to: "users#follow"
-  post "unfollow", to: "users#unfollow"
-  get "home_page", to: "home#index"
-  # get "categories", to: "categories#index"
-  # delete "categories", to: "categories#destroy"
-  # post "categories", to: "categories#new"
-  get "search", to: "home#search"
+  get 'my_post', to: 'posts#my_post'
+  post 'follow', to: 'users#follow'
+  post 'unfollow', to: 'users#unfollow'
+  get 'home_page', to: 'home#index'
+  get 'search', to: 'home#search'
 end
