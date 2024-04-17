@@ -52,7 +52,9 @@ class PostsController < ApplicationController
   # DELETE /posts/1 or /posts/1.json
   def destroy
     @comments_to_delete = @post.comments.where(params[:post_id])
+    @postcategories_to_delete = @post.postcategories.where(params[:post_id])
     @comments_to_delete.destroy_all
+    @postcategories_to_delete.destroy_all
     @post.destroy
 
     respond_to do |format|

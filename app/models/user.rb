@@ -8,8 +8,6 @@ class User < ApplicationRecord
     has_many :subcribers, class_name: "Subscription", foreign_key: 'subcriber_id'
     has_many :subcriber_tos, class_name: "Subscription", foreign_key: 'subcriber_to_id'
 
-    # acts_as_url :username, :sync_url => true, :url_attribute => :slug
-
     def email_required?
       false 
     end   

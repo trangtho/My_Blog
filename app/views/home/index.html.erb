@@ -1,11 +1,6 @@
 <div class="jumbotron" style="text-align:center;">
   <h1 class="display-4">Hello, wellcome to blog application!</h1>
 
-<%= form_tag(search_path, method: :get) do %>
-  <%= text_field_tag :term %>
-  <%= submit_tag 'Search' %>
-<% end %>
-
 </div>
 <% @posts.each do |post| %>
   <div class="mb-3">

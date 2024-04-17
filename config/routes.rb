@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     resources :comments
   end
   resources :users
+  resources :categories
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
@@ -13,7 +14,8 @@ Rails.application.routes.draw do
   post "follow", to: "users#follow"
   post "unfollow", to: "users#unfollow"
   get "home_page", to: "home#index"
-  get "categories", to: "categories#index"
-  post "categories", to: "categories#new"
+  # get "categories", to: "categories#index"
+  # delete "categories", to: "categories#destroy"
+  # post "categories", to: "categories#new"
   get "search", to: "home#search"
 end

@@ -15,7 +15,23 @@ class CategoriesController < ApplicationController
               end
         end
     end
+
+    def destroy
+      debugger
+      @category = Category.find(params[:id])
+      @postcategories_to_delete = @category.postcategories.where(params[:category_id])
+      @postcategories_to_delete.destroy_all
+      @category.destroy
+
+    redirect_to root_path, status: :see_other
+    end
+
     private
+      def set_category
+        @category = Category.find(params[:id])
+        rescue
+          redirect_to root_path
+      end
       def category_params
         params.require(:category).permit(:name)
       end

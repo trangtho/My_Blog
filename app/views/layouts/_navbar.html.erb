@@ -11,11 +11,20 @@
     <div class="form-inline my-2 my-lg-0">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <%= link_to "My Post", my_post_path, class: "navbar-brand" %>
+          <%= form_tag(search_path, method: :get) do %>
+            <%= text_field_tag :term %>
+            <%= submit_tag 'Search', class: "btn btn-light" %>
+          <% end %>
         </li>
         <li class="nav-item active">
-          <%= link_to "New Post", new_post_path, class: "navbar-brand" %>
+          <%= link_to "My Post", my_post_path, class: "nav-link active" %>
         </li>
+        <li class="nav-item active">
+          <%= link_to "New Post", new_post_path, class: "nav-link active" %>
+        </li>
+
+
+
         <li class="nav-item active">
           <%= button_to "Sign out", destroy_user_session_path, method: :delete, class: "btn btn-outline-success" %>
         </li>

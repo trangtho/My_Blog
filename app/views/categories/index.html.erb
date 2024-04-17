@@ -3,6 +3,10 @@
       <% @category.each do |category| %>
         <tr>
           <td><%= category.name%></td>
+          <td><%= link_to "Destroy", category_path(category), data: {
+                    turbo_method: :delete
+                  } %></td>
+
         </tr>
       <%end%>
     </table>

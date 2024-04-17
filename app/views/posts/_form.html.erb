@@ -20,6 +20,12 @@
   </div>
 
   <div class="mb-3">
+    <% if can? :manage, Category %>
+    <%= link_to "Add new Category", categories_path %>
+    <% end %>
+  </div>
+
+  <div class="mb-3">
     <%= form.label :title, style: "display: block", class: "form-label" %>
     <%= form.text_field :title, class: "form-control" %>
   </div>
