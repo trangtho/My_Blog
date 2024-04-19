@@ -22,12 +22,18 @@
         <li class="nav-item active">
           <%= link_to "New Post", new_post_path, class: "nav-link active" %>
         </li>
+        
 
-
-
-        <li class="nav-item active">
-          <%= button_to "Sign out", destroy_user_session_path, method: :delete, class: "btn btn-outline-success" %>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <%= current_user.username%>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#"><%= button_to "Account", class: "btn btn-outline-success" %></a>
+            <a class="dropdown-item"><%= button_to "Sign out", destroy_user_session_path, method: :delete, class: "btn btn-outline-success" %></a>
+          </div>
         </li>
+
       </ul>
       </div>
   </div>

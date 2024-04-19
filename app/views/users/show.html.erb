@@ -11,6 +11,10 @@
 <div class="container">
   <% @posts.each do |post| %>
     <div class="mb-3">
+      Category: 
+    <% post.postcategories.each do |c| %>
+      <%= c.category.name%> | 
+    <% end %>
       <h4><%= post.title %></h3>
       <p><%= post.content %></p>
         <% post.images.each do |file| %>

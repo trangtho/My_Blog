@@ -39,9 +39,17 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1 or /posts/1.json
   def update
     respond_to do |format|
-      if @post.update(post_params)
+      if @post.update(user_id: current_user.id, title: post_params['title'], content: post_params['content'])
+        if post_params['images'].present?
+          post_params['images'].each do |image|
+            @post.images.attach(image)
+          end
+        end
         format.html { redirect_to my_post_url(@post), notice: 'Post was successfully updated.' }
         format.json { render :show, status: :ok, location: @post }
+        post_params['category_ids'].each do |category_ids|
+          @postcategory = @post.postcategories.update(category_id: category_ids)
+        end
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @post.errors, status: :unprocessable_entity }

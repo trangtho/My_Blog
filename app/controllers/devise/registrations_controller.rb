@@ -15,10 +15,11 @@ module Devise
 
     # POST /resource
     def create
-      @sign_up_info = User.find_by(username: sign_up_params[:username])
-      if @sign_up_info
-        set_flash_message! :notice, :signed_up_failed
-      else
+      # @sign_up_info = User.find_by(username: sign_up_params[:username]) || User.find_by(email: sign_up_params[:email])
+      # if @sign_up_info
+      #   # set_flash_message! :notice, :signed_up_failed
+      #   flash.now[:notice] = 'This username already exist!'
+      # else
         build_resource(sign_up_params)
         resource.save
         yield resource if block_given?
@@ -38,7 +39,7 @@ module Devise
           respond_with resource
         end
       end
-    end
+    # end
 
     # GET /resource/edit
     def edit

@@ -7,26 +7,11 @@ class Ability
     # Grant full access to admins
     can :manage, :all if user.role == 'Admin'
 
-    # Grant basic management for regular users (Post, Subscription, Comment)
+    # Grant basic management for regular users (Post, Subscription)
     can :manage, [Post, Subscription] if user.role == 'User'
 
     # Define specific logic for comment deletion (only user-owned)
     can :manage, Comment, user_id: user.id
-    # return unless user.role == 'User'
-
-    # can :manage, Post
-
-    # can :manage, Post do |post|
-    #   # Admins can always delete any comment
-    #   if user.role == 'Admin'
-    #     true
-    #   else
-    #     # Regular users can only delete their own comments
-    #     post.comments.where(user_id: current_user.id).destroyable?
-    #   end
-    # end
-
-    
     # Define abilities for the user here. For example:
     #
     #   return unless user.present?

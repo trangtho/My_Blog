@@ -4,20 +4,22 @@
 
 <% @posts.each do |post| %>
   <div class="mb-3">
+    Category: 
+    <% post.postcategories.each do |c| %>
+      <%= c.category.name%> | 
+    <% end %>
     <h4><%= post.title %></h3>
     <p><%= post.content %></p>
 
     <ul>
         <% post.images.each do |file| %>
-          <li>
             <% if file.representable? %>
-              <%= image_tag file.representation(resize_to_limit: [100, 100]) %>
+              <%= image_tag file.representation(resize_to_limit: [200, 200]) %>
             <% else %>
               <%= link_to rails_blob_path(file, disposition: "attachment") do %>
                 <%= image_tag "placeholder.png", alt: "Download file" %>
               <% end %>
             <% end %>
-          </li>
         <% end %>
       </ul>
       
