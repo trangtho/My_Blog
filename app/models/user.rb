@@ -10,7 +10,7 @@ class User < ApplicationRecord
   validates :username,
           :presence => {:message => "can't be blank." },
           :uniqueness => {:message => "already exists."},
-          :length => { :maximum => 100, :message => "Must be less than 20 characters"}
+          :length => { :maximum => 20, :message => "Must be less than 20 characters"}
   validates :email,
           :presence => {:message => "can't be blank." },
           uniqueness: {:message => "already exists."}
