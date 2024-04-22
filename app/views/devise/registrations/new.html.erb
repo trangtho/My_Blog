@@ -1,10 +1,4 @@
 <h1>Sign up</h1>
-<% if flash[:notice] %>
-  <div class="alert alert-danger" role="alert">
-    <%= flash[:notice] %>
-  </div>
-<% end %>
-
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>

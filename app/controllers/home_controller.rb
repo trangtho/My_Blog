@@ -5,9 +5,9 @@ class HomeController < ApplicationController
 
   def search
     @posts = if params[:term].present?
-               Post.where("lower (posts.title) ILIKE :value OR
-                                                 lower (posts.content) ILIKE :value",
-                          value: "%#{params[:term].downcase}%")
+               Post.where("posts.title ILIKE :value OR
+                                                 posts.content ILIKE :value",
+                          value: "%#{params[:term]}%")
              else
                Post.all.order(created_at: :DESC)
              end
