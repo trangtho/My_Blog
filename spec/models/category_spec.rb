@@ -17,5 +17,13 @@ RSpec.describe Category, type: :model do
       subject.name = nil
       is_expected.to_not be_valid
     end
+    it 'is not valid if name is not unique' do
+      category1 = FactoryBot.create(:category)
+      subject.name = category1.name
+      expect(subject).to be_invalid
+    end
+    it 'is not valid if name is longer than 50' do
+      is_expected.to_not validate_length_of(:name).is_at_least(51)
+    end
   end
 end

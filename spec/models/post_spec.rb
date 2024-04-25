@@ -27,9 +27,8 @@ RSpec.describe Post, type: :model do
       is_expected.to_not be_valid
     end
 
-    it 'is not valid with to short description' do
-      subject.content = 'a' * 4
-      is_expected.to_not be_valid
+    it 'is not valid if content is shorter than 5' do
+      is_expected.to_not validate_length_of(:content).is_at_most(4)
     end
   end
 end

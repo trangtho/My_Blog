@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   def show
+    debugger
     @user = User.find(params[:id])
     @posts = Post.where(user_id: params[:id]).order(created_at: :desc).page(params[:page]).per(3)
     @subcription = Subscription.find_by(subcriber_to_id: params[:id], subcriber_id: current_user.id)

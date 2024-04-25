@@ -15,9 +15,10 @@
     <%= form.label :Category, style: "display: block", class: "form-label" %>
     <%= form.select(:category_ids, Category.all.collect {|p| [ p.name, p.id ] }, 
                                                    { :prompt => "Please select"}, 
-                                                   { :multiple => true, :size => 5  }) %>
-
+                                                   { :multiple => true, :size => 5}) %>
   </div>
+
+
 
   <div class="mb-3">
     <% if can? :manage, Category %>

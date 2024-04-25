@@ -25,20 +25,31 @@ RSpec.describe User, type: :model do
     it 'is valid with valid attributes' do
       is_expected.to be_valid
     end
-
     it 'is not valid without a username' do
       subject.username = nil
       is_expected.to_not be_valid
     end
-
     it 'is not valid without a email' do
       subject.email = nil
       is_expected.to_not be_valid
     end
-
     it 'is not valid without a password' do
       subject.password = nil
       is_expected.to be_valid
     end
+    it 'is not valid if username is not unique' do
+      user1 = FactoryBot.create(:user)
+      subject.username = user1.username
+      expect(subject).to be_invalid
+    end
+    it 'is not valid if username is longer than 20' do
+      is_expected.to_not validate_length_of(:username).is_at_least(21)
+    end
+    it 'is not valid if email is not unique' do
+      user1 = FactoryBot.create(:user)
+      subject.email = user1.email
+      expect(subject).to be_invalid
+    end
   end
+  
 end

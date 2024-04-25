@@ -5,7 +5,6 @@ class CategoriesController < ApplicationController
 
   def create
     @category = Category.new(category_params)
-    respond_to do |format|
       if @category.save
         respond_to do |format|
           format.js { render inline: 'location.reload();' }
@@ -15,12 +14,10 @@ class CategoriesController < ApplicationController
         render :index
       end
     end
-  end
 
   def destroy
+    debugger
     @category = Category.find(params[:id])
-    @postcategories_to_delete = @category.postcategories.where(params[:category_id])
-    @postcategories_to_delete.destroy_all
     @category.destroy
     redirect_to category_path
   end
