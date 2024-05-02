@@ -2,7 +2,6 @@ require 'rails_helper'
 
 RSpec.describe CategoriesController, type: :controller do
   login_user
-  # let!(:category) { FactoryBot.create :category }
 
   describe 'GET #index' do
     let!(:category) { FactoryBot.create :category }
@@ -22,16 +21,16 @@ RSpec.describe CategoriesController, type: :controller do
   describe 'POST #create' do
     context 'with valid attributes' do
       let!(:valid_attributes) { attributes_for(:category) }
-      before { post :create, params: {category: valid_attributes, format: :js } }
+      before { post :create, params: { category: valid_attributes, format: :js } }
       it 'creates a new category' do
         expect(Category.count).to eq(1)
       end
-      it "assigns the newly created store to @store" do
+      it 'assigns the newly created store to @store' do
         expect(assigns(:category)).to be_a(Category)
         expect(assigns(:category)).to eq(Category.last)
       end
-      it "redirects to the stores index page" do
-        expect(response.body).to eq "location.reload();"
+      it 'reloads this page' do
+        expect(response.body).to eq 'location.reload();'
       end
     end
 
@@ -43,14 +42,14 @@ RSpec.describe CategoriesController, type: :controller do
     end
   end
 
-  # describe 'DELETE #destroy' do
-  #   let!(:valid_attributes) { attributes_for(:category) }
-  #   before { delete :destroy, params: { id: :valid_attributes.id } }
-  #   it 'deletes the category' do
-  #     expect(Category.count).to.by(-1)
-  #   end
-  #   it 'redirects to categories#index' do
-  #     expect(response).to redirect_to category_path
-  #   end
-  # end
+  describe 'DELETE #destroy' do
+    let!(:z) { FactoryBot.create :category }
+    before { delete :destroy, params: { id: z.id } }
+    it 'deletes the category' do
+      expect(Category.count).to eq(0)
+    end
+    it 'redirects to categories#index' do
+      expect(response).to redirect_to category_path
+    end
+  end
 end

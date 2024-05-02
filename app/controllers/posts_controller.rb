@@ -31,17 +31,9 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1 or /posts/1.json
   def update
     respond_to do |format|
-      if @post.update(user_id: current_user.id, title: post_params['title'], content: post_params['content'])
-        if post_params['images'].present?
-          post_params['images'].each do |image|
-            @post.images.attach(image)
-          end
-        end
+      if @post.update(post_params.merge(user_id: current_user.id))
         format.html { redirect_to my_post_url(@post), notice: 'Post was successfully updated.' }
         format.json { render :show, status: :ok, location: @post }
-        post_params['category_ids'].each do |category_ids|
-          @postcategory = @post.postcategories.update(category_id: category_ids)
-        end
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @post.errors, status: :unprocessable_entity }
@@ -52,7 +44,6 @@ class PostsController < ApplicationController
   # DELETE /posts/1 or /posts/1.json
   def destroy
     @post.destroy
-
     respond_to do |format|
       format.html { redirect_to my_post_url, notice: 'Post was successfully destroyed.' }
       format.json { head :no_content }

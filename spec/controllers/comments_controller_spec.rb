@@ -1,45 +1,39 @@
 require 'rails_helper'
 
-# RSpec.describe CommentsController, type: :controller do
-#   login_user
-#   let!(:post) {FactoryBot.create :post}
-#   let!(:comment) { FactoryBot.create :comment }
-
-#   describe 'GET #index' do
-#     # let!(:category) { FactoryBot.create :category }
-#     before { get :index }
-#     it 'returns http success' do
-#       expect(response).to have_http_status(:success)
-#     end
-#     it 'populates an array of categories' do
-#       all_comments = Comment.all
-#       expect(assigns(:comment)).to eq(all_comments)
-#     end
-#     it 'renders the index template' do
-#       expect(response).to render_template(:index)
-#     end
-#   end
-# end
 RSpec.describe CommentsController, type: :controller do
-    login_user
-  
-    let!(:post) { FactoryBot.create(:post) }
-    let!(:comment) { FactoryBot.create(:comment, post: post) }
-  
-    describe 'GET #index' do
-      before { get :index, params: { post_id: post.id } }
-  
-      it 'returns http success' do
-        expect(response).to have_http_status(:success)
+  login_user
+  describe 'POST #create' do
+    context 'with valid attributes' do
+      let!(:p) { FactoryBot.create :post }
+      let!(:valid_attributes) { attributes_for(:comment) }
+      before { post :create, params: { post_id: p.id, comment: valid_attributes, format: :js } }
+      it 'creates a new category' do
+        expect(Comment.count).to eq(1)
       end
-  
-      it 'populates an array of comments for the specified post' do
-        expect(assigns(:comments)).to eq([comment])
+      it 'assigns the newly created store to @store' do
+        expect(assigns(:comment)).to be_a(Comment)
+        expect(assigns(:comment)).to eq(Comment.last)
       end
-  
-      it 'renders the index template' do
-        expect(response).to render_template(:index)
+      it 'reloads this page' do
+        expect(response.body).to eq 'location.reload();'
+      end
+    end
+
+    context 'with invalid attributes' do
+      let!(:invalid_attributes) { attributes_for(:comment, content: nil) }
+      it "don't create new comment" do
+        expect(Comment.count).to eq(0)
       end
     end
   end
-  
+  describe 'DELETE #destroy' do
+    let!(:co) { FactoryBot.create :comment }
+    before { delete :destroy, params: { id: co.id }, format: :js }
+    it 'deletes the category' do
+      expect(Comment.count).to eq(0)
+    end
+    it 'reloads this page' do
+      expect(response.body).to eq 'location.reload();'
+    end
+  end
+end
