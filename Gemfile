@@ -40,7 +40,7 @@ gem "cancancan"
 gem 'simplecov', require: false, group: :test
 
 gem 'rails-controller-testing'
-
+gem "sidekiq"
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 

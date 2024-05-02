@@ -1,5 +1,8 @@
+require 'sidekiq/web'
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users do
+    mount Sidekiq::Web => '/sidekiq'
+  end
   root to: 'home#index'
   resources :posts do
     resources :comments
@@ -17,4 +20,5 @@ Rails.application.routes.draw do
   post 'unfollow', to: 'users#unfollow'
   get 'home_page', to: 'home#index'
   get 'search', to: 'home#search'
+  mount Sidekiq::Web => '/sidekiq'
 end

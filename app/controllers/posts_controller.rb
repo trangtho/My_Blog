@@ -26,6 +26,7 @@ class PostsController < ApplicationController
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end
+    UserJob.perform_in(1.minutes, 'bob', 5)
   end
 
   # PATCH/PUT /posts/1 or /posts/1.json

@@ -14,7 +14,7 @@ RSpec.describe UsersController, type: :controller do
     let!(:u) { FactoryBot.create :user }
     before { post :follow, params: { user_id: u.id, format: :js } }
     it 'new subcription' do
-        expect(Subscription.count).to eq(1)
+      expect(Subscription.count).to eq(1)
     end
     it 'reload' do
       expect(response.body).to eq 'location.reload();'
@@ -26,7 +26,7 @@ RSpec.describe UsersController, type: :controller do
     before { post :follow, params: { user_id: u.id, format: :js } }
     before { post :unfollow, params: { user_id: u.id, format: :js } }
     it 'reload' do
-        expect(Subscription.count).to eq(0)
+      expect(Subscription.count).to eq(0)
     end
   end
 end

@@ -34,9 +34,9 @@ RSpec.describe CategoriesController, type: :controller do
       end
     end
 
-    context "with invalid attributes" do
+    context 'with invalid attributes' do
       let!(:invalid_attributes) { attributes_for(:category, name: nil) }
-      it "re-renders the new method" do
+      it 're-renders the new method' do
         expect(Category.count).to eq(0)
       end
     end

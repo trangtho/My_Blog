@@ -16,7 +16,6 @@ class CategoriesController < ApplicationController
     end
 
   def destroy
-    debugger
     @category = Category.find(params[:id])
     @category.destroy
     redirect_to category_path

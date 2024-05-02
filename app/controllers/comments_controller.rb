@@ -1,6 +1,5 @@
 class CommentsController < ApplicationController
   # def index
-  #   debugger
   #   @comments = Comment.all
   # end
 
