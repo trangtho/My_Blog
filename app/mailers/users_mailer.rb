@@ -1,11 +1,13 @@
 class UsersMailer < ActionMailer::Base
-  def notification_email(subcriber_id)
-    @user = User.find(subcriber_id)
-
-    mail(to: @user.email,
-         subject: 'notification emails') do |format|
-      format.text
-      format.html
+  default from: 'no-reply@livedevs.com'
+  def notification_email(id)
+    @user = User.find(id)
+    mail(to: @user.email, subject: 'notification email')
+  end
+  def notification_admin_email()
+    admins = User.where(role: 'Admin')
+    admins.each do |admin|
+      mail(to: admin.email, subject: 'Notification failed background jobs')
     end
   end
 end

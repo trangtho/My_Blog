@@ -26,7 +26,12 @@ class PostsController < ApplicationController
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end
-    UserJob.perform_in(1.minutes, 'bob', 5)
+    @subcriptions = Subscription.where(subcriber_to_id: current_user.id)
+    @subcriptions.each do |subcription|
+      # UsersMailer.notification_email(subcription.subcriber).deliver_later
+      UserJob.perform_async(subcription.subcriber.id)
+    end
+    # UserJob.perform_async(current_user)
   end
 
   # PATCH/PUT /posts/1 or /posts/1.json

@@ -41,6 +41,7 @@ gem 'simplecov', require: false, group: :test
 
 gem 'rails-controller-testing'
 gem "sidekiq"
+gem 'rails_event_store'
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 
@@ -82,8 +83,8 @@ end
 
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
-  gem "capybara"
-  gem "selenium-webdriver"
+  gem 'capybara'
+  gem 'selenium-webdriver'
   gem 'shoulda-matchers', '~> 6.0'
-
+  gem 'rspec-sidekiq'
 end

@@ -1,7 +1,9 @@
 ---
-:concurrency: 1
+:concurrency: 5
+:max_retries: 3
 :queues:
-  - default
   - mailers
+  - default
+  
   - mysite_default
   - mysite_mailers

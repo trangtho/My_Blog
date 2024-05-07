@@ -1,5 +1,6 @@
 <div class="jumbotron" style="text-align:center;">
   <h1 class="display-4">Hello, wellcome to <%= current_user.username %> 'blog!</h1>
+  Number of comments: <%= current_user.comment_num%>
 </div>
 
 <% @posts.each do |post| %>
@@ -28,7 +29,8 @@
       <%= link_to "Delete this post", post_path(post), method: :delete, data: { confirm: "Are you sure you want to delete this post?" } %>
     </div>
     <%= render "comments/comment", post_id: post.id %>
-    <h4>List of Comments</h4>
+     <h4>List of Comments</h4>
+    Number of comments: <%= post.comment_num%>
     <table class="table table-striped">
       <% post.comments.each do |comment| %>
         <tr>

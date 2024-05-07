@@ -11,8 +11,8 @@ RSpec.describe UsersController, type: :controller do
   end
 
   describe 'POST #follow' do
-    let!(:u) { FactoryBot.create :user }
-    before { post :follow, params: { user_id: u.id, format: :js } }
+    let!(:user) { FactoryBot.create :user }
+    before { post :follow, params: { user_id: user.id, format: :js } }
     it 'new subcription' do
       expect(Subscription.count).to eq(1)
     end
@@ -22,9 +22,9 @@ RSpec.describe UsersController, type: :controller do
   end
 
   describe 'POST #unfollow' do
-    let!(:u) { FactoryBot.create :user }
-    before { post :follow, params: { user_id: u.id, format: :js } }
-    before { post :unfollow, params: { user_id: u.id, format: :js } }
+    let!(:user) { FactoryBot.create :user }
+    before { post :follow, params: { user_id: user.id, format: :js } }
+    before { post :unfollow, params: { user_id: user.id, format: :js } }
     it 'reload' do
       expect(Subscription.count).to eq(0)
     end

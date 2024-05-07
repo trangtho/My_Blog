@@ -11,6 +11,9 @@ require 'rspec/rails'
 require 'shoulda/matchers'
 require 'devise'
 require_relative 'support/controller_macros'
+# sidekiq
+require 'sidekiq/testing'
+Sidekiq::Testing.fake! # by default it is fake
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in

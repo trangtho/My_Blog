@@ -28,13 +28,14 @@
       <%= render "comments/comment", post_id: post.id %>
     </div>
     <h4>List of Comments</h4>
+    Number of comments: <%= post.comment_num%>
     <table class="table table-striped">
       <% post.comments.each do |comment| %>
         <tr>
           <td><%= comment.user.username%></td>
           <td><%= comment.content%></td>
           <% if can? :destroy, comment %>
-          <td><%= link_to "Delete", comment_path(comment), data: {
+          <td><%= link_to "Delete", comment_path(comment, post_id: post.id, userpost_id: post.user_id), data: {
                     turbo_method: :delete
                   } %></td>
                   <%else%>

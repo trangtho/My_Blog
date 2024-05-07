@@ -52,9 +52,9 @@ RSpec.describe PostsController, type: :controller do
 
   describe 'PUT #update' do
     context 'with valid attributes' do
-      let!(:p) { FactoryBot.create :post }
+      let!(:post) { FactoryBot.create :post }
       let!(:valid_attributes) { attributes_for(:post) }
-      before { put :update, params: { id: p.id, post: valid_attributes, format: :html } }
+      before { put :update, params: { id: post.id, post: valid_attributes, format: :html } }
       it 'change post attributes' do
         expect(assigns(:post)).to be_a(Post)
       end
@@ -72,8 +72,8 @@ RSpec.describe PostsController, type: :controller do
   end
 
   describe 'DELETE #destroy' do
-    let!(:p) { FactoryBot.create :post }
-    before { delete :destroy, params: { id: p.id, format: :html } }
+    let!(:post) { FactoryBot.create :post }
+    before { delete :destroy, params: { id: post.id, format: :html } }
     it 'deletes the category' do
       expect(Post.count).to eq(0)
     end

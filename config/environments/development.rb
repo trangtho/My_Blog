@@ -39,6 +39,7 @@ Rails.application.configure do
   config.active_job.queue_adapter = :sidekiq
   config.action_mailer.perform_deliveries = true
   config.action_mailer.delivery_method = :smtp
+  config.action_mailer.default_options = { from: 'no-reply@livedevs.com' }
   config.active_job.queue_name_prefix = 'mysite'
   config.active_job.queue_name_delimiter = '_'
   # Don't care if the mailer can't send.
