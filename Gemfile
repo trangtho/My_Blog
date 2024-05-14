@@ -40,8 +40,16 @@ gem "cancancan"
 gem 'simplecov', require: false, group: :test
 
 gem 'rails-controller-testing'
-gem "sidekiq"
+gem 'sidekiq'
 gem 'rails_event_store'
+
+gem 'rack-cors'
+gem 'devise-jwt'
+gem 'jsonapi-serializer'
+gem 'rack-attack'
+gem 'rswag'
+gem 'rswag-api'
+gem 'rswag-ui'
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 
@@ -68,6 +76,7 @@ group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
   gem 'rspec-rails', '~> 6.1.0'
   gem 'factory_bot_rails'
+  gem 'rswag-specs'
 end
 
 group :development do

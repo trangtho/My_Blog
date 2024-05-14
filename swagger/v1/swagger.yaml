@@ -1,0 +1,297 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/api/v1/posts/{post_id}/comments":
+    parameters:
+    - name: post_id
+      in: path
+      description: post_id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: list comments
+      tags:
+      - Comments
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: create comment
+      tags:
+      - Comments
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                content:
+                  type: string
+        required: true
+  "/api/v1/posts/{post_id}/comments/new":
+    parameters:
+    - name: post_id
+      in: path
+      description: post_id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: new comment
+      responses:
+        '200':
+          description: successful
+  "/api/v1/posts/{post_id}/comments/{id}/edit":
+    parameters:
+    - name: post_id
+      in: path
+      description: post_id
+      required: true
+      schema:
+        type: string
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: edit comment
+      responses:
+        '200':
+          description: successful
+  "/api/v1/posts/{post_id}/comments/{id}":
+    parameters:
+    - name: post_id
+      in: path
+      description: post_id
+      required: true
+      schema:
+        type: string
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show comment
+      responses:
+        '200':
+          description: successful
+    put:
+      summary: update comment
+      responses:
+        '200':
+          description: successful
+    delete:
+      summary: delete comment
+      tags:
+      - Comments
+      responses:
+        '200':
+          description: successful
+  "/api/v1/posts":
+    get:
+      summary: list posts
+      tags:
+      - Posts
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: create post
+      tags:
+      - Posts
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                content:
+                  type: string
+                category_ids:
+                  type: array
+                  items:
+                    type: integer
+              required:
+              - title
+              - content
+              - category_ids
+  "/api/v1/posts/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show post
+      tags:
+      - Posts
+      responses:
+        '200':
+          description: successful
+    put:
+      summary: update post
+      tags:
+      - Posts
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                content:
+                  type: string
+                category_ids:
+                  type: array
+                  items:
+                    type: integer
+              required:
+              - title
+              - content
+              - category_ids
+    delete:
+      summary: delete post
+      tags:
+      - Posts
+      responses:
+        '200':
+          description: successful
+  "/my_posts":
+    get:
+      summary: my_post post
+      tags:
+      - Posts
+      responses:
+        '200':
+          description: successful
+  "/api/v1/users/current_user":
+    get:
+      summary: list current_users
+      tags:
+      - Session
+      responses:
+        '200':
+          description: successful
+  "/users/cancel":
+    get:
+      summary: cancel registration
+      responses:
+        '200':
+          description: successful
+  "/users/sign_up":
+    get:
+      summary: new registration
+      responses:
+        '200':
+          description: successful
+  "/users/edit":
+    get:
+      summary: edit registration
+      responses:
+        '200':
+          description: successful
+  "/users":
+    patch:
+      summary: update registration
+      responses:
+        '200':
+          description: successful
+    put:
+      summary: update registration
+      responses:
+        '200':
+          description: successful
+    delete:
+      summary: delete registration
+      tags:
+      - Registration
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: create registration
+      tags:
+      - Registration
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+                email:
+                  type: string
+                role:
+                  type: string
+              required:
+              - username
+              - password
+              - email
+              - role
+  "/users/sign_in":
+    post:
+      summary: create session
+      tags:
+      - Session
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+              required:
+              - username
+              - password
+  "/users/sign_out":
+    delete:
+      summary: delete session
+      tags:
+      - Session
+      responses:
+        '200':
+          description: successful
+servers:
+- url: http://{defaultHost}
+  variables:
+    defaultHost:
+      default: localhost:3000/

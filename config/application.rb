@@ -11,6 +11,7 @@ module MyBlog
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
     config.active_job.queue_adapter = :sidekiq
+    config.middleware.use Rack::Attack
     config.to_prepare do
       Rails.configuration.event_store = event_store = RailsEventStore::Client.new
       event_store.subscribe(CommentCount.new, to: [CommentCreated, CommentDestroyed])

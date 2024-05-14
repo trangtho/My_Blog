@@ -31,7 +31,6 @@ class PostsController < ApplicationController
       # UsersMailer.notification_email(subcription.subcriber).deliver_later
       UserJob.perform_async(subcription.subcriber.id)
     end
-    # UserJob.perform_async(current_user)
   end
 
   # PATCH/PUT /posts/1 or /posts/1.json

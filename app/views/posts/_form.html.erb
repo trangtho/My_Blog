@@ -40,7 +40,9 @@
     <%= form.label :Images %>
     <%= form.file_field :images, multiple: true %>
   </div>
-
+  <div class="mb-3">
+    <%= form.hidden_field :user_id, value: current_user.id %>
+  </div>
   <div>
     <%= form.submit "Save", class: "btn btn-primary" %>
   </div>
